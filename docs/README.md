@@ -2,4 +2,4 @@
 来自于掘金小册：https://juejin.im/book/5bffcbc9f265da614b11b731
 
 ## 在线阅读
-https://relph1119.github.io/mysql-learning-notes/
+https://book-how-mysql-runs.netlify.app
