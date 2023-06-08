@@ -26,11 +26,22 @@
     },
     search: {
       maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-      paths: [], // 指定搜索的路径，例如 ['/guide/', '/api/']
+      paths: 'auto', // 指定搜索的路径，例如 ['/guide/', '/api/']
       placeholder: '搜索', // 搜索框占位符
       noData: '找不到结果', // 搜索无结果时显示的文字
-      depth: 4 // 搜索标题的最大层级
-    }
+      depth: 6 // 搜索标题的最大层级
+    },
+    editLinkPattern: ':repo/blob/main/docs/mysql/:path', // 编辑链接模板
+    plugins: [
+      function(hook, vm) {
+        hook.afterEach(function(html, next) {
+          var url = vm.config.repo + '/edit/main/docs/' + vm.route.file;
+          //var url = vm.config.repo + '/blob/main/docs/' + vm.route.file;
+          var editHtml = '<div style="text-align: right"><a href="' + url + '">Edit on GitHub</a></div>';
+          next(html + editHtml);
+        });
+      },
+    ],
   }
 </script>
 <!-- Put them above docsify.min.js -->
@@ -48,5 +59,7 @@
 />
 <!-- search -->
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+<!-- Image Enlargement and Zoom -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
 </body>
 </html>
